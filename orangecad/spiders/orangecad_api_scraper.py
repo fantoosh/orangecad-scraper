@@ -5,13 +5,6 @@ import scrapy
 import pandas as pd
 from urllib.parse import urlencode
 
-data = pkgutil.get_data("orangecad", "resources/urls.csv")
-print(data)
-if data:
-    content = data.decode('utf-8')
-    urls = content.splitlines()
-
-#     print(urls[0])
 
 df = pd.read_csv('map_id.csv')
 map_ids = df.map_id.to_list()
@@ -51,8 +44,8 @@ class OrangecadApiScraperSpider(scrapy.Spider):
         yield scrapy.Request('https://esearch.orangecad.net', headers=self.headers)
 
     def parse(self, response, **kwargs):
-        # urls = queries[:64]
-        # print(querystring)
+        urls = queries[:64]
+        print(querystring)
         yield from response.follow_all(urls, callback=self.parse_raw_json, headers=self.headers)
 
     def parse_raw_json(self, response, **kwargs):

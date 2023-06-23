@@ -7,8 +7,5 @@ setup(
     version='1.0',
     packages=find_packages(),
     entry_points={'scrapy': ['settings = orangecad.settings']},
-    package_data={
-        'orangecad': ['resources/*.csv']
-    },
     zip_safe=False,
 )
